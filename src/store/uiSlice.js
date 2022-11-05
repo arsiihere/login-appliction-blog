@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
-    isLogin: false,
+    isLogin: window.localStorage.getItem("userEmail") ? true : false,
+    recallFetch: true,
     hasAccount: true,
     username: "",
     password: "",
@@ -11,6 +12,13 @@ const uiSlice = createSlice({
   reducers: {
     toggle(state) {
       state.hasAccount = !state.hasAccount;
+    },
+    toggleRefetchData(state) {
+      console.log("Calling me");
+      state.recallFetch = !state.recallFetch;
+    },
+    userStatus(state, action) {
+      state.isLogin = action.payload.status;
     },
     setUserName(state, action) {
       state.username = action.payload.username;

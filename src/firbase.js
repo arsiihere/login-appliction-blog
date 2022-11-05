@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 const firebaseConfig = {
@@ -22,7 +23,11 @@ const auth = getAuth();
 export function SignUp(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
+export function Login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
 
 export function LogOut() {
   signOut(auth);
+  window.localStorage.removeItem("userEmail");
 }

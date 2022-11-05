@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/uiSlice";
-import { SignUp } from "../../firbase";
+import { SignUp, Login } from "../../firbase";
 import Input from "../Input/Input";
 
 function Form() {
@@ -18,7 +18,14 @@ function Form() {
 
   async function handleSignUp(e) {
     e.preventDefault();
-    await SignUp(uiItems.username, uiItems.password);
+    let response;
+    if (uiItems.hasAccount) {
+      response = await Login(uiItems.username, uiItems.password);
+    } else {
+      response = await SignUp(uiItems.username, uiItems.password);
+    }
+    window.localStorage.setItem("userEmail", response.user.email);
+    dispatch(uiActions.userStatus({ status: true }));
   }
   return (
     <form>

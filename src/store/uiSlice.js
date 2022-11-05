@@ -14,7 +14,6 @@ const uiSlice = createSlice({
       state.hasAccount = !state.hasAccount;
     },
     toggleRefetchData(state) {
-      console.log("Calling me");
       state.recallFetch = !state.recallFetch;
     },
     userStatus(state, action) {

@@ -29,7 +29,10 @@ function AddPost() {
   }, [isLoading]);
   return (
     <Container>
-      <div className="wrap-post-container" style={{ marginLeft: "-6rem" }}>
+      <div
+        className="wrap-post-container"
+        style={{ marginLeft: "-6rem", marginTop: "1rem" }}
+      >
         <form className="post-form">
           <span className="post-form-title">
             Express Your Thought of the Day

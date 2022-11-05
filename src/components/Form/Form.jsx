@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/uiSlice";
 import { SignUp, Login } from "../../firbase";
 import Input from "../Input/Input";
 
 function Form() {
+  const [isLodaing, setIsLoading] = useState(false);
+  const [errorState, setErrorState] = useState({
+    hasError: false,
+    message: "",
+  });
   const uiItems = useSelector((state) => {
     return state.ui;
   });
@@ -17,15 +22,34 @@ function Form() {
   };
 
   async function handleSignUp(e) {
+    setIsLoading(true);
     e.preventDefault();
     let response;
     if (uiItems.hasAccount) {
-      response = await Login(uiItems.username, uiItems.password);
+      try {
+        response = await Login(uiItems.username, uiItems.password);
+        window.localStorage.setItem("userEmail", response.user.email);
+        dispatch(uiActions.userStatus({ status: true }));
+      } catch (error) {
+        setErrorState({
+          hasError: true,
+          message: error,
+        });
+      }
+      setIsLoading(false);
     } else {
-      response = await SignUp(uiItems.username, uiItems.password);
+      try {
+        response = await SignUp(uiItems.username, uiItems.password);
+        window.localStorage.setItem("userEmail", response.user.email);
+        dispatch(uiActions.userStatus({ status: true }));
+      } catch (error) {
+        setErrorState({
+          hasError: true,
+          message: error,
+        });
+      }
+      setIsLoading(false);
     }
-    window.localStorage.setItem("userEmail", response.user.email);
-    dispatch(uiActions.userStatus({ status: true }));
   }
   return (
     <form>
@@ -48,6 +72,7 @@ function Form() {
       </div>
       <div className="form-group">
         <button
+          disabled={isLodaing}
           type="submit"
           className="btn form-control btn-primary rounded submit px-3"
           onClick={handleSignUp}
@@ -58,8 +83,8 @@ function Form() {
       <div className="w-100 text-center mt-4 text">
         <p className="mb-0">
           {!uiItems.hasAccount
-            ? "Don't have an account?"
-            : "Already Have Account ?"}
+            ? "Already Have Account?"
+            : "Don't have an account?"}
         </p>
         <a
           style={{ cursor: "pointer" }}
@@ -67,9 +92,11 @@ function Form() {
             dispatch(uiActions.toggle());
           }}
         >
-          {uiItems.hasAccount ? "Log In" : "Sign Up"}{" "}
+          {!uiItems.hasAccount ? "Log In" : "Sign Up"}{" "}
         </a>
       </div>
+      {isLodaing && <p>Loading</p>}
+      {!isLodaing && errorState.hasError && <p>{errorState.message.message}</p>}
     </form>
   );
 }

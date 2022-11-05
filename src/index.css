@@ -170,6 +170,10 @@ form {
   align-items: center !important;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .d-flex {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -205,7 +209,7 @@ input:focus {
   }
 }
 .btn.btn-primary {
-  background: #b689b0 !important;
+  background: #b689b0;
   border: 1px solid #b689b0 !important;
   color: #fff !important;
 }
@@ -215,7 +219,23 @@ button:not(:disabled),
 [type="submit"]:not(:disabled) {
   cursor: pointer;
 }
+.card-content {
+  background-color: #fff;
+  padding: 30px;
+}
+p {
+  font-size: 16px;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
 
+.card-title {
+  height: 20px;
+  margin: 0;
+  text-align: center;
+}
 .btn {
   cursor: pointer;
   border-radius: 40px;
@@ -224,6 +244,80 @@ button:not(:disabled),
   font-size: 15px;
 }
 
+.card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 350px;
+  height: auto;
+}
+.header {
+  background-color: #000232;
+  padding: 1.5rem;
+  color: aliceblue;
+  box-shadow: 0px 10px 34px -15px rgb(0 0 0 / 24%);
+}
+
+.wrap-post-container {
+  width: 668px;
+  background: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  padding: 52px 60px 78px;
+  box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
+  -moz-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
+  -o-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.post-input-warp {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.post-form-title {
+  display: block;
+  font-family: OpenSans-Regular;
+  font-size: 30px;
+  color: #333;
+  line-height: 1.2;
+  text-align: left;
+  padding-bottom: 33px;
+}
+.post-input {
+  display: block;
+  width: 100%;
+  background: 0 0;
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.2;
+}
+
+input.post-input {
+  padding: 1rem;
+  border: none;
+}
+
+textarea.post-input {
+  min-height: 199px;
+  padding: 25px 20px 15px 30px;
+  outline: none;
+  border: none;
+}
+.post-form {
+  width: 100%;
+}
+@media (max-width: 576px) {
+  .wrap-post-container {
+    padding: 52px 15px 78px;
+  }
+}
 .pl-3,
 .px-3 {
   padding-left: 1rem !important;
